@@ -28,5 +28,10 @@ form?.addEventListener('submit', (e) => {
   form.reset();
 });
 
+document.getElementById('back-to-top')?.addEventListener('click', (e) => {
+  e.preventDefault();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
 const yearEl = document.getElementById('year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
