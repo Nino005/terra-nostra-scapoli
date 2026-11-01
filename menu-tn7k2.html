@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Menù – Terra Nostra Scapoli</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Colori e font: modificabili qui */
+:root{--bg:#faf8f3;--ink:#1d2340;--navy:#2f3b66;--mute:#5d6485;--line:#d5d8e6;--serif:"Cormorant Garamond",Georgia,serif;--sans:"Montserrat",system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root{--bg:#141829;--ink:#eceefa;--navy:#b4bdea;--mute:#a0a7c8;--line:#363e63}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans)}
+.hero{position:relative;min-height:46vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:48px 20px;color:#fff;background:#2f3b66 url("https://terranostrascapoli.it/caption%281%29.jpg") center/cover}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(27,34,66,.62),rgba(27,34,66,.82))}
+.hero>*{position:relative}
+.hero small{letter-spacing:.3em;font-size:12px;text-transform:uppercase;opacity:.85}
+.hero h1{margin:10px 0 8px;font:500 clamp(40px,11vw,68px)/1 var(--serif);letter-spacing:.14em;text-transform:uppercase}
+.hero p{margin:0;font:italic 400 20px/1.3 var(--serif);opacity:.92}
+main{max-width:720px;margin:0 auto;padding:0 20px 40px}
+nav{display:flex;gap:8px;position:sticky;top:0;background:var(--bg);padding:14px 0 10px;z-index:2}
+nav button{flex:1;padding:12px 8px;border:1.5px solid var(--navy);background:none;color:var(--navy);font:600 13px/1.2 var(--sans);border-radius:999px;cursor:pointer}
+nav button[aria-selected=true]{background:var(--navy);color:var(--bg)}
+nav button:focus-visible{outline:3px solid var(--navy);outline-offset:2px}
+.avviso{margin:4px 0 0;text-align:center;font-size:13px;color:var(--mute)}
+section[hidden]{display:none}
+h2{margin:38px 0 4px;font:500 30px/1.2 var(--serif);letter-spacing:.16em;color:var(--navy);text-transform:uppercase}
+ul{list-style:none;margin:0;padding:0}
+li{padding:11px 0;border-bottom:1px solid var(--line)}
+li div{display:flex;gap:14px;justify-content:space-between;align-items:baseline}
+li b{font-weight:600;color:var(--navy);font-size:14.5px}
+li i{font-style:normal;font-weight:600;white-space:nowrap}
+li p{margin:2px 0 0;font-size:13.5px;color:var(--mute);max-width:56ch}
+.fisso{background:var(--navy);color:var(--bg);border-radius:16px;padding:12px 24px 26px;margin-top:22px}
+.fisso h2,.fisso li b{color:inherit}
+.fisso li{border-color:rgba(255,255,255,.25)}
+.fisso li:last-child{border:0}
+.tot{display:flex;justify-content:space-between;align-items:baseline;margin-top:16px;font:500 40px/1 var(--serif)}
+.tot small{font:400 13px var(--sans);opacity:.85}
+.nota{margin:14px 0 0;font-size:13px;color:var(--mute)}
+footer{margin-top:48px;padding-top:22px;border-top:1px solid var(--line);font-size:13px;color:var(--mute)}
+footer h3{margin:0 0 6px;font:500 22px var(--serif);letter-spacing:.12em;color:var(--navy);text-transform:uppercase}
+footer a{color:var(--navy)}
+footer .al{font-size:11.5px;margin-top:16px}
+</style>
+</head>
+<body>
+<header class="hero">
+<small>Scapoli · Molise</small>
+<h1>Terra Nostra</h1>
+<p>Dalla nostra terra, alla vostra tavola.</p>
+</header>
+<main>
+<nav role="tablist" aria-label="Scegli il menù">
+<button role="tab" id="t-classico" aria-controls="classico">Menù classico</button>
+<button role="tab" id="t-festivo" aria-controls="festivo">Domenica e festivi</button>
+</nav>
+<p class="avviso" id="avviso" hidden>La domenica dalle 12 alle 18 si serve il menù domenica e festivi.</p>
+<section id="classico" role="tabpanel" aria-labelledby="t-classico"></section>
+<section id="festivo" role="tabpanel" aria-labelledby="t-festivo" hidden></section>
+<footer>
+<h3>Terra Nostra</h3>
+<p>Via Fonte La Villa 1, Scapoli (IS) · <a href="tel:+390865954135">0865 954135</a><br>
+Wi-Fi: TerraNostra · Password: TerraNostra</p>
+<p class="al">Gli alimenti e le bevande possono contenere ingredienti o coadiuvanti considerati allergeni (Reg. UE 1169/2011). Chiedi al personale l’elenco completo.</p>
+</footer>
+</main>
+<script>
+// [nome, prezzo, descrizione]
+var CLASSICO=[
+["Antipasti",[
+["Antipasto all’italiana","9€","Prosciutto crudo, formaggi locali, salsiccia secca, bruschette miste e zuppe calde"],
+["Bruschette miste","3€","Pane tostato con pomodori freschi, formaggio e salsa tartufata"],
+["Prosciutto crudo e melone","7€"],["Zuppa di fagioli","5€"],["Formaggi vari","5€"]]],
+["Primi",[
+["Ravioloni alla scapolese","9€","Pasta fresca, passata di pomodoro, ripieno di patate, salsiccia, bieta e prosciutto crudo"],
+["Fettuccine al cinghiale","9€","Pasta fresca, ragù ricco a base di cinghiale, passata di pomodoro e spezie"],
+["Fettuccine ai funghi porcini e salsa tartufata","8€","Pasta fresca, funghi porcini e salsa tartufata"],
+["Fettuccine al capriolo","9€","Pasta fresca, sugo bianco di capriolo con spezie"],
+["Lasagne alla bolognese","8€","Pasta fresca con ragù di carne, besciamella, uova sode e parmigiano reggiano grattugiato"],
+["Raviolini al tartufo","8€","Raviolini freschi ripieni di salsa tartufata"],
+["Pasta del giorno","8–10€"]]],
+["Secondi",[
+["Arrosto misto","13€","Bistecca di maiale, salsiccia arrosto e agnello"],
+["Bistecca di vitello arrosto","13€","Bistecca di vitello cotta alla brace"],
+["Bistecca di maiale arrosto","7€"],["Agnello arrosto","13€"],["Salsiccia di maiale arrosto","7€"],
+["Bistecca di vitello con rucola e porcini","15€","Bistecca di vitello cotta in padella con porcini su base di rucola"],
+["Baccalà","15€","Su ordinazione"],["Carne di selvaggina","15–20€","Su ordinazione"]]],
+["Contorni",[["Insalata verde-mista","3€"],["Insalata di zucchine","3€"],["Patatine fritte","3€"],["Verdure grigliate","4€"],["Contorni vari","5€"]]],
+["Pizze bianche",[
+["Tartufo","7€","Mozzarella e salsa tartufata"],["Porcini","7€","Mozzarella e porcini"],["Mimosa","5€","Mozzarella e mais"],
+["Pizza fantasia","7€","Ingredienti a fantasia del pizzaiolo"],["Panna e cotto","6€","Mozzarella, panna e prosciutto cotto"],
+["Americana","7€","Mozzarella, wurstel e patatine fritte"],
+["Ortolana","7€","Mozzarella, carciofi, olive, mais, rucola, melanzane e zucchine"],
+["Rucola e crudo","7€","Mozzarella, rucola e crudo"],["Quattro formaggi","7€","Mozzarella, gorgonzola, pecorino ed emmental"],
+["Enrico","8€","Mozzarella, panna, salsa tartufata, porcini e tonno"],
+["Caprese","6€","Focaccia con pomodoro fresco e bocconcini"],
+["Calzone","6€","Pomodoro, mozzarella, funghi champignon e prosciutto cotto"]]],
+["Pizze rosse",[
+["Marinara","4€","Salsa di pomodoro e origano"],["Margherita","5€","Salsa di pomodoro e mozzarella"],
+["Mozzarella e cotto","6€","Salsa di pomodoro, mozzarella e prosciutto cotto"],
+["Quattro stagioni","7€","Salsa di pomodoro, mozzarella, funghi champignon, carciofi, prosciutto cotto e olive"],
+["Salsiccia","6€","Salsa di pomodoro, mozzarella e salsiccia fresca"],
+["Tonno e cipolla","6€","Salsa di pomodoro, mozzarella, tonno e cipolla"],
+["Napoli","6€","Salsa di pomodoro, mozzarella e alici sott’olio"],
+["Boscaiola","7€","Salsa di pomodoro, mozzarella, salsiccia fresca e funghi champignon"],
+["Melanzane e peperoni","7€","Salsa di pomodoro, mozzarella, melanzane e peperoni"],
+["Diavola","6€","Salsa di pomodoro, mozzarella e salame piccante"],
+["Terra Nostra","8€","Salsa di pomodoro, mozzarella, gorgonzola, alici sott’olio e peperoncino"]]],
+["Dolci",[["Pan di Stelle","4€"],["Tiramisù","4€"],["Crostata","4€"],["Dolce del giorno","4€"]]],
+["Bevande",[["Acqua","2€"],["Vino bianco · rosso","4€/L"],["Lattine","2,5€"],["Coca Cola 1L","4€"],["Birra Peroni 33","2€"],["Birra Peroni · Ichnusa · HB","3,5€"]]]
+];
+var FISSO=["Antipasto","Lasagne","Fettuccine al tartufo e porcini","Arrosto misto con contorni","Frutta","Dolce","Caffè","Bevande"];
+var SCELTA=[
+["Antipasti",[["Antipasto all’italiana","9€"],["Formaggi e bruschette","8€"]]],
+["Primi",[["Lasagne alla bolognese","8€"],["Fettuccine ai funghi porcini e salsa tartufata","8€"],["Fettuccine al capriolo","9€"],["Polenta rossa o bianca con salsiccia","—"]]],
+["Secondi",[["Arrosto misto","13€"],["Salsiccia arrosto","7€"],["Bistecca di maiale","7€"],["Bistecca di vitello","13€"]]],
+["Contorni",[["Insalata verde e mista","3€"],["Patatine fritte","3€"],["Insalata di zucchine","3€"]]],
+["Dolci e caffè",[["Pan di Stelle","4€"],["Crostata","4€"],["Tiramisù","4€"],["Frutta","—"],["Caffè","—"]]],
+["Bevande",[["Acqua","2€"],["Vino bianco · rosso","4€/L"]]]
+];
+function lista(items){return "<ul>"+items.map(function(x){return "<li><div><b>"+x[0]+"</b><i>"+x[1]+"</i></div>"+(x[2]?"<p>"+x[2]+"</p>":"")+"</li>"}).join("")+"</ul>"}
+function blocchi(d){return d.map(function(s){return "<h2>"+s[0]+"</h2>"+lista(s[1])}).join("")}
+document.getElementById("classico").innerHTML=blocchi(CLASSICO)+'<p class="nota"><strong>Coperto 2€</strong></p>';
+document.getElementById("festivo").innerHTML='<div class="fisso"><h2>Menù fisso</h2><ul>'+FISSO.map(function(n){return "<li><div><b>"+n+"</b></div></li>"}).join("")+'</ul><div class="tot"><span>32€</span><small>a persona</small></div></div><h2 style="margin-top:44px">Menù a scelta</h2>'+blocchi(SCELTA).replace(/<h2>/g,'<h2 style="font-size:23px;margin-top:26px">')+'<p class="nota">Coperto 2€</p>';
+
+var tabs=[].slice.call(document.querySelectorAll("[role=tab]")),manuale=false;
+function show(id){tabs.forEach(function(t){var on=t.getAttribute("aria-controls")===id;t.setAttribute("aria-selected",on);document.getElementById(t.getAttribute("aria-controls")).hidden=!on})}
+// Domenica dalle 12:00 alle 17:59 (ora italiana) = menù domenica e festivi
+function domenicaPranzo(){
+  var p=new Intl.DateTimeFormat("en-GB",{timeZone:"Europe/Rome",weekday:"short",hour:"numeric",hourCycle:"h23"}).formatToParts(new Date()),w="",h=0;
+  p.forEach(function(x){if(x.type==="weekday")w=x.value;if(x.type==="hour")h=+x.value});
+  return w==="Sun"&&h>=12&&h<18;
+}
+function auto(){if(manuale)return;var d=domenicaPranzo();show(d?"festivo":"classico");document.getElementById("avviso").hidden=!d}
+tabs.forEach(function(t){t.addEventListener("click",function(){manuale=true;document.getElementById("avviso").hidden=true;show(t.getAttribute("aria-controls"));window.scrollTo(0,0)})});
+if(location.hash==="#festivo"||location.hash==="#classico"){manuale=true;show(location.hash.slice(1))}else auto();
+setInterval(auto,60000);
+</script>
+</body>
+</html>
