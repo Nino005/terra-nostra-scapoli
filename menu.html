@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Menù – Terra Nostra Scapoli</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Italiana&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Colori e font: modificabili qui */
+:root{--bg:#f6f1e4;--ink:#211f1a;--navy:#1e2a20;--accent:#a77b2f;--mute:#514c40;--line:#b7a77f;--serif:"Italiana",Georgia,serif;--sans:"Jost",Arial,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans)}
+.hero{position:relative;min-height:46vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:48px 20px;color:#fff;background:#2f3b66 url("https://terranostrascapoli.it/caption%281%29.jpg") center/cover}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(22,21,18,.52),rgba(22,21,18,.78))}
+.hero>*{position:relative}
+.hero small{letter-spacing:.3em;font-size:12px;text-transform:uppercase;opacity:.85}
+.hero h1{margin:10px 0 8px;font:400 clamp(40px,11vw,68px)/1 var(--serif);letter-spacing:.14em;text-transform:uppercase}
+.hero p{margin:0;font:italic 400 20px/1.3 var(--serif);opacity:.92}
+main{max-width:720px;margin:0 auto;padding:0 20px 40px}
+nav{display:flex;gap:8px;position:sticky;top:0;background:var(--bg);padding:14px 0 10px;z-index:2}
+nav button{flex:1;padding:12px 8px;border:1.5px solid var(--accent);background:none;color:var(--navy);font:600 13px/1.2 var(--sans);border-radius:999px;cursor:pointer}
+nav button[aria-selected=true]{background:var(--navy);color:var(--bg)}
+nav button:focus-visible{outline:3px solid var(--navy);outline-offset:2px}
+.avviso{margin:4px 0 0;text-align:center;font-size:13px;color:var(--mute)}
+section[hidden]{display:none}
+.filtri{display:flex;gap:8px;overflow-x:auto;overscroll-behavior-inline:contain;position:sticky;top:0;z-index:3;margin:0 -20px;padding:10px 20px;background:var(--bg);border-bottom:1px solid var(--line);scrollbar-width:thin}
+.filtri a{flex:0 0 auto;padding:9px 14px;border:1px solid var(--accent);border-radius:999px;background:var(--bg);color:var(--navy);font:600 13px/1.2 var(--sans);text-decoration:none;white-space:nowrap}
+.filtri a:hover,.filtri a:focus-visible{background:var(--navy);color:var(--bg);outline:2px solid var(--accent);outline-offset:2px}
+.categoria{scroll-margin-top:72px}
+h2{margin:38px 0 4px;font:500 30px/1.2 var(--serif);letter-spacing:.16em;color:var(--navy);text-transform:uppercase}
+ul{list-style:none;margin:0;padding:0}
+li{padding:11px 0;border-bottom:1px solid var(--line)}
+li div{display:flex;gap:14px;justify-content:space-between;align-items:baseline}
+li b{font-weight:600;color:var(--navy);font-size:14.5px}
+li i{font-style:normal;font-weight:600;white-space:nowrap}
+li p{margin:2px 0 0;font-size:13.5px;color:var(--mute);max-width:56ch}
+.fisso{background:var(--navy);color:var(--bg);border-radius:16px;padding:12px 24px 26px;margin-top:22px}
+.fisso h2,.fisso li b{color:inherit}
+.fisso li{border-color:rgba(255,255,255,.25)}
+.fisso li:last-child{border:0}
+.tot{display:flex;justify-content:space-between;align-items:baseline;margin-top:16px;font:500 40px/1 var(--serif)}
+.tot small{font:400 13px var(--sans);opacity:.85}
+.nota{margin:14px 0 0;font-size:13px;color:var(--mute)}
+.home-link{display:inline-flex;align-items:center;justify-content:center;margin:18px 0 2px;padding:10px 18px;border:1.5px solid var(--accent);border-radius:999px;background:var(--navy);color:var(--bg);font:600 13px/1.2 var(--sans);text-decoration:none;transition:background .2s,color .2s}
+.home-link:hover{background:var(--accent);color:#fff}
+.home-link:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+footer{margin-top:48px;padding-top:22px;border-top:1px solid var(--line);font-size:13px;color:var(--mute)}
+footer h3{margin:0 0 6px;font:500 22px var(--serif);letter-spacing:.12em;color:var(--navy);text-transform:uppercase}
+footer a{color:var(--navy)}
+footer .al{font-size:11.5px;margin-top:16px}
+</style>
+</head>
+<body>
+<header class="hero">
+<small>Scapoli · Molise</small>
+<h1>Terra Nostra</h1>
+<p>Dalla nostra terra, alla vostra tavola.</p>
+</header>
+<main>
+<a class="home-link" href="https://terranostrascapoli.it/" aria-label="Torna alla home page di Terra Nostra">← Torna alla home</a>
+<h2 class="titolo-menu">Menù</h2>
+<p class="avviso" id="avviso" hidden>È attivo il menù domenica e festivi.</p>
+<section id="classico" aria-label="Menù classico"></section>
+<section id="festivo" aria-label="Menù domenica e festivi" hidden></section>
+<footer>
+<h3>Terra Nostra</h3>
+<p>Via Fonte La Villa 1, Scapoli (IS) · <a href="tel:+390865954135">0865 954135</a><br>
+Wi-Fi: TerraNostra · Password: TerraNostra</p>
+<p class="al">Gli alimenti e le bevande possono contenere ingredienti o coadiuvanti considerati allergeni (Reg. UE 1169/2011). Chiedi al personale l’elenco completo.</p>
+</footer>
+</main>
+<script>
+// [nome, prezzo, descrizione]
+var CLASSICO=[
+["Antipasti",[
+["Antipasto all’italiana","9€","Prosciutto crudo, formaggi locali, salsiccia secca, bruschette miste e zuppe calde"],
+["Bruschette miste","3€","Pane tostato con pomodori freschi, formaggio e salsa tartufata"],
+["Prosciutto crudo e melone","7€"],["Zuppa di fagioli","5€"],["Formaggi vari","5€"]]],
+["Primi",[
+["Ravioloni alla scapolese","9€","Pasta fresca, passata di pomodoro, ripieno di patate, salsiccia, bieta e prosciutto crudo"],
+["Fettuccine al cinghiale","9€","Pasta fresca, ragù ricco a base di cinghiale, passata di pomodoro e spezie"],
+["Fettuccine ai funghi porcini e salsa tartufata","8€","Pasta fresca, funghi porcini e salsa tartufata"],
+["Fettuccine al capriolo","9€","Pasta fresca, sugo bianco di capriolo con spezie"],
+["Lasagne alla bolognese","8€","Pasta fresca con ragù di carne, besciamella, uova sode e parmigiano reggiano grattugiato"],
+["Raviolini al tartufo","8€","Raviolini freschi ripieni di salsa tartufata"],
+["Pasta del giorno","8–10€"]]],
+["Secondi",[
+["Arrosto misto","13€","Bistecca di maiale, salsiccia arrosto e agnello"],
+["Bistecca di vitello arrosto","13€","Bistecca di vitello cotta alla brace"],
+["Bistecca di maiale arrosto","7€"],["Agnello arrosto","13€"],["Salsiccia di maiale arrosto","7€"],
+["Bistecca di vitello con rucola e porcini","15€","Bistecca di vitello cotta in padella con porcini su base di rucola"],
+["Baccalà","15€","Su ordinazione"],["Carne di selvaggina","15–20€","Su ordinazione"]]],
+["Contorni",[["Insalata verde-mista","3€"],["Insalata di zucchine","3€"],["Patatine fritte","3€"],["Verdure grigliate","4€"],["Contorni vari","5€"]]],
+["Pizze bianche",[
+["Tartufo","7€","Mozzarella e salsa tartufata"],["Porcini","7€","Mozzarella e porcini"],["Mimosa","5€","Mozzarella e mais"],
+["Pizza fantasia","7€","Ingredienti a fantasia del pizzaiolo"],["Panna e cotto","6€","Mozzarella, panna e prosciutto cotto"],
+["Americana","7€","Mozzarella, wurstel e patatine fritte"],
+["Ortolana","7€","Mozzarella, carciofi, olive, mais, rucola, melanzane e zucchine"],
+["Rucola e crudo","7€","Mozzarella, rucola e crudo"],["Quattro formaggi","7€","Mozzarella, gorgonzola, pecorino ed emmental"],
+["Enrico","8€","Mozzarella, panna, salsa tartufata, porcini e tonno"],
+["Caprese","6€","Focaccia con pomodoro fresco e bocconcini"],
+["Calzone","6€","Pomodoro, mozzarella, funghi champignon e prosciutto cotto"]]],
+["Pizze rosse",[
+["Marinara","4€","Salsa di pomodoro e origano"],["Margherita","5€","Salsa di pomodoro e mozzarella"],
+["Mozzarella e cotto","6€","Salsa di pomodoro, mozzarella e prosciutto cotto"],
+["Quattro stagioni","7€","Salsa di pomodoro, mozzarella, funghi champignon, carciofi, prosciutto cotto e olive"],
+["Salsiccia","6€","Salsa di pomodoro, mozzarella e salsiccia fresca"],
+["Tonno e cipolla","6€","Salsa di pomodoro, mozzarella, tonno e cipolla"],
+["Napoli","6€","Salsa di pomodoro, mozzarella e alici sott’olio"],
+["Boscaiola","7€","Salsa di pomodoro, mozzarella, salsiccia fresca e funghi champignon"],
+["Melanzane e peperoni","7€","Salsa di pomodoro, mozzarella, melanzane e peperoni"],
+["Diavola","6€","Salsa di pomodoro, mozzarella e salame piccante"],
+["Terra Nostra","8€","Salsa di pomodoro, mozzarella, gorgonzola, alici sott’olio e peperoncino"]]],
+["Dolci",[["Pan di Stelle","4€"],["Tiramisù","4€"],["Crostata","4€"],["Dolce del giorno","4€"]]],
+["Bevande",[["Acqua","2€"],["Vino bianco · rosso","4€/L"],["Lattine","2,5€"],["Coca Cola 1L","4€"],["Birra Peroni 33","2€"],["Birra Peroni · Ichnusa · HB","3,5€"]]]
+];
+var FISSO=["Antipasto","Lasagne","Fettuccine al tartufo e porcini","Arrosto misto con contorni","Frutta","Dolce","Caffè","Bevande"];
+var SCELTA=[
+["Antipasti",[["Antipasto all’italiana","9€"],["Formaggi vari","5€"],["Bruschette miste","3€"]]],
+["Primi",[["Lasagne alla bolognese","8€"],["Fettuccine ai funghi porcini e salsa tartufata","8€"],["Fettuccine al capriolo","9€"],["Polenta rossa o bianca con salsiccia","8€"]]],
+["Secondi",[["Arrosto misto","13€"],["Salsiccia arrosto","7€"],["Bistecca di maiale","7€"],["Bistecca di vitello","13€"]]],
+["Contorni",[["Insalata verde e mista","3€"],["Patatine fritte","3€"],["Insalata di zucchine","3€"]]],
+["Dolci e caffè",[["Pan di Stelle","4€"],["Crostata","4€"],["Tiramisù","4€"],["Frutta","5€"],["Caffè","1€"]]],
+["Bevande",[["Acqua","2€"],["Vino bianco · rosso","4€/L"],["Lattine","2,5€"],["Coca Cola 1L","4€"],["Birra Peroni 33","2€"],["Birra Peroni · Ichnusa · HB","3,5€"]]]
+];
+function lista(items){return "<ul>"+items.map(function(x){return "<li><div><b>"+x[0]+"</b><i>"+x[1]+"</i></div>"+(x[2]?"<p>"+x[2]+"</p>":"")+"</li>"}).join("")+"</ul>"}
+function slug(s){return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")}
+function blocchi(d,prefisso){return d.map(function(s){var id=prefisso+slug(s[0]);return '<div class="categoria" id="'+id+'"><h2>'+s[0]+'</h2>'+lista(s[1])+"</div>"}).join("")}
+function pulsantiCategorie(d,prefisso){return '<nav class="filtri" aria-label="Vai a una categoria">'+d.map(function(s){var id=prefisso+slug(s[0]);return '<a href="#'+id+'">'+s[0]+'</a>'}).join("")+'</nav>'}
+document.getElementById("classico").innerHTML=pulsantiCategorie(CLASSICO,"cat-")+blocchi(CLASSICO,"cat-")+'<p class="nota"><strong>Coperto 2€</strong></p>';
+document.getElementById("festivo").innerHTML=pulsantiCategorie(SCELTA,"festivo-")+'<div class="fisso"><h2>Menù fisso</h2><ul>'+FISSO.map(function(n){return "<li><div><b>"+n+"</b></div></li>"}).join("")+'</ul><div class="tot"><span>32€</span><small>a persona</small></div></div><h2 style="margin-top:44px">Menù a scelta</h2>'+blocchi(SCELTA,"festivo-").replace(/<h2>/g,'<h2 style="font-size:23px;margin-top:26px">')+'<p class="nota">Coperto 2€</p>';
+
+document.querySelectorAll(".filtri a").forEach(function(a){a.addEventListener("click",function(e){e.preventDefault();var target=document.getElementById(a.getAttribute("href").slice(1));if(target)target.scrollIntoView({behavior:"smooth",block:"start"})})});
+function pasqua(y){var a=y%19,b=Math.floor(y/100),c=y%100,d=Math.floor(b/4),e=b%4,f=Math.floor((b+8)/25),g=Math.floor((b-f+1)/3),h=(19*a+b-d-g+15)%30,i=Math.floor(c/4),k=c%4,l=(32+2*e+2*i-h-k)%7,m=Math.floor((a+11*h+22*l)/451),mese=Math.floor((h+l-7*m+114)/31),giorno=(h+l-7*m+114)%31+1;return new Date(Date.UTC(y,mese-1,giorno))}
+function chiave(d){return d.getUTCFullYear()+"-"+String(d.getUTCMonth()+1).padStart(2,"0")+"-"+String(d.getUTCDate()).padStart(2,"0")}
+function festivoNazionale(anno,giorno){var datePasqua=pasqua(anno),lunedi=new Date(datePasqua.getTime()+86400000),giorni=[anno+"-01-01",anno+"-01-06",anno+"-04-25",anno+"-05-01",anno+"-06-02",anno+"-08-15",anno+"-11-01",anno+"-12-08",anno+"-12-25",anno+"-12-26",chiave(datePasqua),chiave(lunedi)];return giorni.indexOf(giorno)!==-1}
+function aggiornaMenu(){var p=new Intl.DateTimeFormat("en-GB",{timeZone:"Europe/Rome",year:"numeric",month:"2-digit",day:"2-digit",weekday:"short",hour:"2-digit",hourCycle:"h23"}).formatToParts(new Date()),v={};p.forEach(function(x){v[x.type]=x.value});var giorno=v.year+"-"+v.month+"-"+v.day,ora=Number(v.hour),sera31=(v.month==="12"&&v.day==="31"&&v.weekday!=="Sun"&&ora>=17)||(v.month==="01"&&v.day==="01"&&ora<2&&new Date(Date.UTC(Number(v.year),0,0)).getUTCDay()!==0),fasciaOrdinaria=ora>=11&&ora<18,festivo=sera31||(fasciaOrdinaria&&(festivoNazionale(Number(v.year),giorno)||v.weekday==="Sun"));document.getElementById("classico").hidden=festivo;document.getElementById("festivo").hidden=!festivo;document.getElementById("avviso").hidden=!festivo}
+aggiornaMenu();setInterval(aggiornaMenu,60000);
+</script>
+</body>
+</html>
